@@ -73,28 +73,28 @@ We can also see the product of matrices $\vb{AB}$ in the list of columns $\times
 \begin{equation}
     \vb{AB} = \mqty[\vb{a}_1 & \vb{a}_2 & \dots & \vb{a}_m ] \mqty[\boldsymbol{\beta}_1^\intercal\\ \boldsymbol{\beta}_2^\intercal\\ \vdots \\ \boldsymbol{\beta}_n^\intercal\\] = \vb{a}_1\boldsymbol{\beta}_1^\intercal + \vb{a}_2\boldsymbol{\beta}_2^\intercal+\dots+ \vb{a}_n\boldsymbol{\beta}_n^\intercal 
 \end{equation}
+where we see that the product $\vb{AB}$ is the sum of $n$ matrices of rank 1.
 
 \section{Unitary Matrices}
-Besides the interpretations presented above, we also need to understand unitary (or othogonal) matrices to interpret SVD. Unitary matrices are special matrices $\vb{U}=\mqty[\vb{u}_1 & \dots & \vb{u}_n]\in\mathbb{R}^{m\tims n}$ in which the column vectors $\vb{u}_i\in\mathbb{R}^m$ are all orthonormal, \textit{i.e.} $\vb{u}_i^\intercal \vb{u}_j = \delta_{ij}$. This allows us to employ them as basis vectors, and expand any $\vb{x}\in\mathbb{R}^m$ as $$\vb{x}= \sum_{i=1} x^i \vb{u}_i$$ 
-\todo[inline]{I think the column vectors form a basis only when $m=n$, in which case the basis is complete. Check this.}
+Besides the interpretations presented above, we also need to understand unitary (or othogonal) matrices to interpret SVD. Unitary matrices are special matrices $\vb{U}=\mqty[\vb{u}_1 & \dots & \vb{u}_n]\in\mathbb{R}^{n^2}$ in which the column vectors $\vb{u}_i\in\mathbb{R}^n$ are all orthonormal, \textit{i.e.} $\vb{u}_i^\intercal \vb{u}_j = \delta_{ij}$. This allows us to employ them as basis vectors, and expand any $\vb{x}\in\mathbb{R}^n$ as $$\vb{x}= \sum_{i=1} x^i \vb{u}_i$$ 
 
 Unitary matrices are quite easy to invert. Their inverse $\vb{U}^{-1}$ is simply their transpose $\vb{U}^{\intercal}$. We can prove this claim by checking $U^\intercal U = 1$ in the column array of row vectors $\times$ array of column vectors interpretation
 \begin{equation}
-    \vb{U}^{\intercal}\vb{U} = \mqty[\vb{u}_1^\intercal \\ \vb{u}_2^\intercal \\ \vdots \\\vb{u}_m^\intercal]\mqty[\vb{u}_1 & \vb{u}_1 & \dots & \vb{u}_m] =     
-        \mqty[\vb{u}_1^\intercal\vb{u}_1 & \vb{u}_1^\intercal\vb{u}_2 & \dots & \vb{u}_1^\intercal\vb{u}_k\\
-        \vb{u}_2^\intercal\vb{u}_1 & \vb{u}_2^\intercal\vb{u}_2 & \dots & \vb{u}_2^\intercal\vb{u}_k\\
+    \vb{U}^{\intercal}\vb{U} = \mqty[\vb{u}_1^\intercal \\ \vb{u}_2^\intercal \\ \vdots \\\vb{u}_n^\intercal]\mqty[\vb{u}_1 & \vb{u}_1 & \dots & \vb{u}_n] =     
+        \mqty[\vb{u}_1^\intercal\vb{u}_1 & \vb{u}_1^\intercal\vb{u}_2 & \dots & \vb{u}_1^\intercal\vb{u}_n\\
+        \vb{u}_2^\intercal\vb{u}_1 & \vb{u}_2^\intercal\vb{u}_2 & \dots & \vb{u}_2^\intercal\vb{u}_n\\
         \vdots & \vdots & \ddots & \vdots\\
-        \vb{u}_m^\intercal\vb{u}_m & \vb{u}_1^\intercal\vb{u}_2 & \dots & \vb{u}_m^\intercal\vb{u}_k],
+        \vb{u}_n^\intercal\vb{u}_1 & \vb{u}_1^\intercal\vb{u}_2 & \dots & \vb{u}_n^\intercal\vb{u}_n],
 \end{equation}
 or, a little more subtly, we can prove $\vb{U}\vb{U}^\intercal=1$ in the array of columns $\times$ column array of rows interpretation
 \begin{equation}
-    \vb{U}\vb{U}^\intercal = \vb{u}_1\vb{u}_1^\intercal + \vb{u}_2\vb{u}_2^\intercal + \dots + \vb{u}_m\vb{u}_m^\intercal
+    \vb{U}\vb{U}^\intercal = \vb{u}_1\vb{u}_1^\intercal + \vb{u}_2\vb{u}_2^\intercal + \dots + \vb{u}_n\vb{u}_n^\intercal
 \end{equation}
 Recalling that $\vb{x}$ can be expanded in terms of the columns of $\vb{U}$, we have
 \begin{equation}
     \begin{aligned}
-    \vb{U}\vb{U}^\intercal \vb{x} &= \vb{u}_1\vb{u}_1^\intercal\vb{x} + \vb{u}_2\vb{u}_2^\intercal\vb{x} + \dots + \vb{u}_m\vb{u}_m^\intercal\vb{x}\\
-       & = \vb{u}_1\vb{x}^1 + \vb{u}_2\vb{x}^2 + \dots + \vb{u}_m\vb{x}^m\\
+    \vb{U}\vb{U}^\intercal \vb{x} &= \vb{u}_1\vb{u}_1^\intercal\vb{x} + \vb{u}_2\vb{u}_2^\intercal\vb{x} + \dots + \vb{u}_n\vb{u}_n^\intercal\vb{x}\\
+       & = \vb{u}_1 x^1 + \vb{u}_2 x^2 + \dots + \vb{u}_m x^n\\
        & = \vb{x}
     \end{aligned}
  \end{equation}
@@ -102,7 +102,7 @@ Recalling that $\vb{x}$ can be expanded in terms of the columns of $\vb{U}$, we 
 
  Unitary matrices have this name because they are analogous to unitary complex numbers in some sense. Unitary complex numbers have modulus $1$ and thus preserve the modulus of any complex number upon multiplication. Similarly, unitary matrices preserve the norm, or more generally, the inner product, of any vector. To see this, let $\vb{y}_1 = \vb{U}^\intercal \vb{x}_1$ and $\vb{y}_2 = \vb{U}^\intercal \vb{x}_1$. It's easy to see that $\vb{y}_2^\intercal \vb{y}_1 = \vb{x}_2^\intercal \vb{U} \vb{U}^\intercal \vb{x}_1 = \vb{x}_2^\intercal\vb{x}_1$.
 
-\section{Singular Value Decomposition}
+\section{Singular Value Decomposition}[
 Now we turn to our main goal: to make sens of the Singular Values Decomposition. Simply stated, the decomposition consists of expressing \textbf{any} matrix as the product of insightful matrices
 \begin{equation}
     \vb{A}=\vb{U}\boldsymbol{\Sigma}\vb{V}^\intercal
