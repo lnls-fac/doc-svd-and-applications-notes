@@ -15,9 +15,9 @@
 \section{Introduction}
 \section{Matrices, vectors and products}
 
-We begin by introducing some notation and interpretations of the multiplication operations among matrices with matrices and matrices with and vectors. These will be essential for interpreting Singular Value Decomposition intuitively. 
+We begin by introducing some notation and interpretations of the multiplication operations among matrices with matrices and matrices with and vectors. These will be essential for interpreting Singular Value Decomposition intuitively.
 
-Throughout this text, vectors $\vb{a}\in\mathbb{R}^m$ are represented by $m\times 1$ column matrices $\mqty[a^1 & a^2 & \dots & a^m]^{\intercal}\in\mathbb{R}^{m \times 1} $. Vectors (and matrices) are bold-typed while its components (entries) are not. 
+Throughout this text, vectors $\vb{a}\in\mathbb{R}^m$ are represented by $m\times 1$ column matrices $\mqty[a^1 & a^2 & \dots & a^m]^{\intercal}\in\mathbb{R}^{m \times 1} $. Vectors (and matrices) are bold-typed while its components (entries) are not.
 
 First we highlight two complementary ways to see matrices and their products. We can interpret a matrix $\vb{A}\in \mathbb{R}^{m\times n}$ as an array of $n$ column vectors $\vb{a}_i\in\mathbb{R}^{m\times 1}$,  with $i=1,\dots,n$:
 \begin{equation}
@@ -34,7 +34,7 @@ or as a column array of $m$ transpose vectors $\boldsymbol{\alpha}_i^\intercal=\
 \todo[inline]{find out how to insert horizontal bars to represent the complete rows}
 The transpose vectors $\boldsymbol{\alpha}_i^\intercal$ are the $i$th row of the matrix $\vb{A}$.
 \todo[inline]{add a simple ecxample displaying the $\vb{a}$ and $\boldsymbol{\alpha}$ vectors}
-The product of a matrix with a vector, say $\vb{Ax}$,  can be seen as the $m\times 1$ matrix whose $i$th row is the scalar product of the $\boldsymbol{\alpha_i}$ vector with $\vb{x}$ vector, \textit{i.e.} 
+The product of a matrix with a vector, say $\vb{Ax}$,  can be seen as the $m\times 1$ matrix whose $i$th row is the scalar product of the $\boldsymbol{\alpha_i}$ vector with $\vb{x}$ vector, \textit{i.e.}
 \begin{equation}
     \vb{Ax} = \mqty[\boldsymbol{\alpha}_1^\intercal \\ \boldsymbol{\alpha}_2^\intercal \\ \vdots \\ \boldsymbol{\alpha}_m^\intercal] \vb{ x} = \mqty[\boldsymbol{\alpha}_1^\intercal \vb{x}\\ \boldsymbol{\alpha}_2^\intercal \vb{x}\\ \vdots \\ \boldsymbol{\alpha}_m^\intercal\vb{x}].
 \end{equation}
@@ -66,43 +66,44 @@ In this form it's clear why $\vb{A}^\intercal \vb{A}$, which equals
         \vb{a}_m^\intercal\vb{a}_m & \vb{a}_1^\intercal\vb{a}_2 & \dots & \vb{a}_m^\intercal\vb{a}_k],
     \end{aligned}\
 \end{equation}
-is called the \textit{self-covariance matrix}. The diagonal entries are $\norm{\vb{a}_i}^2$, while the off-diagonal ones are the projections of the $i$th and $j$th column vectors of $\vb{A}$. In a matrix where the columns are highly correlated, $\vb{A}^\intercal\vb{A}$ is a dense matrix, whereas diagonal terms dominate if the columns are less correlated..  
+is called the \textit{self-covariance matrix}. The diagonal entries are $\norm{\vb{a}_i}^2$, while the off-diagonal ones are the projections of the $i$th and $j$th column vectors of $\vb{A}$. In a matrix where the columns are highly correlated, $\vb{A}^\intercal\vb{A}$ is a dense matrix, whereas diagonal terms dominate if the columns are less correlated..
 
-We can also see the product of matrices $\vb{AB}$ in the list of columns $\times$ column rows format. 
+We can also see the product of matrices $\vb{AB}$ in the list of columns $\times$ column rows format.
 \todo[inline]{add a simple example first}
 \begin{equation}
-    \vb{AB} = \mqty[\vb{a}_1 & \vb{a}_2 & \dots & \vb{a}_m ] \mqty[\boldsymbol{\beta}_1^\intercal\\ \boldsymbol{\beta}_2^\intercal\\ \vdots \\ \boldsymbol{\beta}_n^\intercal\\] = \vb{a}_1\boldsymbol{\beta}_1^\intercal + \vb{a}_2\boldsymbol{\beta}_2^\intercal+\dots+ \vb{a}_n\boldsymbol{\beta}_n^\intercal 
+    \vb{AB} = \mqty[\vb{a}_1 & \vb{a}_2 & \dots & \vb{a}_m ] \mqty[\boldsymbol{\beta}_1^\intercal\\ \boldsymbol{\beta}_2^\intercal\\ \vdots \\ \boldsymbol{\beta}_n^\intercal\\] = \vb{a}_1\boldsymbol{\beta}_1^\intercal + \vb{a}_2\boldsymbol{\beta}_2^\intercal+\dots+ \vb{a}_n\boldsymbol{\beta}_n^\intercal
 \end{equation}
+where we see that the product $\vb{AB}$ is the sum of $n$ matrices of rank 1.
 
 \section{Unitary Matrices}
-Besides the interpretations presented above, we also need to understand unitary (or othogonal) matrices to interpret SVD. Unitary matrices are special matrices $\vb{U}=\mqty[\vb{u}_1 & \dots & \vb{u}_n]\in\mathbb{R}^{m\tims n}$ in which the column vectors $\vb{u}_i\in\mathbb{R}^m$ are all orthonormal, \textit{i.e.} $\vb{u}_i^\intercal \vb{u}_j = \delta_{ij}$. This allows us to employ them as basis vectors, and expand any $\vb{x}\in\mathbb{R}^m$ as $$\vb{x}= \sum_{i=1} x^i \vb{u}_i$$ 
-\todo[inline]{I think the column vectors form a basis only when $m=n$, in which case the basis is complete. Check this.}
+Besides the interpretations presented above, we also need to understand unitary (or othogonal) matrices to interpret SVD. Unitary matrices are special matrices $\vb{U}=\mqty[\vb{u}_1 & \dots & \vb{u}_n]\in\mathbb{R}^{n^2}$ in which the column vectors $\vb{u}_i\in\mathbb{R}^n$ are all orthonormal, \textit{i.e.} $\vb{u}_i^\intercal \vb{u}_j = \delta_{ij}$. This allows us to employ them as basis vectors, and expand any $\vb{x}\in\mathbb{R}^n$ as $$\vb{x}= \sum_{i=1} x^i \vb{u}_i$$
 
 Unitary matrices are quite easy to invert. Their inverse $\vb{U}^{-1}$ is simply their transpose $\vb{U}^{\intercal}$. We can prove this claim by checking $U^\intercal U = 1$ in the column array of row vectors $\times$ array of column vectors interpretation
 \begin{equation}
-    \vb{U}^{\intercal}\vb{U} = \mqty[\vb{u}_1^\intercal \\ \vb{u}_2^\intercal \\ \vdots \\\vb{u}_m^\intercal]\mqty[\vb{u}_1 & \vb{u}_1 & \dots & \vb{u}_m] =     
-        \mqty[\vb{u}_1^\intercal\vb{u}_1 & \vb{u}_1^\intercal\vb{u}_2 & \dots & \vb{u}_1^\intercal\vb{u}_k\\
-        \vb{u}_2^\intercal\vb{u}_1 & \vb{u}_2^\intercal\vb{u}_2 & \dots & \vb{u}_2^\intercal\vb{u}_k\\
+    \vb{U}^{\intercal}\vb{U} = \mqty[\vb{u}_1^\intercal \\ \vb{u}_2^\intercal \\ \vdots \\\vb{u}_n^\intercal]\mqty[\vb{u}_1 & \vb{u}_1 & \dots & \vb{u}_n] =
+        \mqty[\vb{u}_1^\intercal\vb{u}_1 & \vb{u}_1^\intercal\vb{u}_2 & \dots & \vb{u}_1^\intercal\vb{u}_n\\
+        \vb{u}_2^\intercal\vb{u}_1 & \vb{u}_2^\intercal\vb{u}_2 & \dots & \vb{u}_2^\intercal\vb{u}_n\\
         \vdots & \vdots & \ddots & \vdots\\
-        \vb{u}_m^\intercal\vb{u}_m & \vb{u}_1^\intercal\vb{u}_2 & \dots & \vb{u}_m^\intercal\vb{u}_k],
+        \vb{u}_n^\intercal\vb{u}_1 & \vb{u}_1^\intercal\vb{u}_2 & \dots & \vb{u}_n^\intercal\vb{u}_n],
 \end{equation}
 or, a little more subtly, we can prove $\vb{U}\vb{U}^\intercal=1$ in the array of columns $\times$ column array of rows interpretation
 \begin{equation}
-    \vb{U}\vb{U}^\intercal = \vb{u}_1\vb{u}_1^\intercal + \vb{u}_2\vb{u}_2^\intercal + \dots + \vb{u}_m\vb{u}_m^\intercal
+    \vb{U}\vb{U}^\intercal = \vb{u}_1\vb{u}_1^\intercal + \vb{u}_2\vb{u}_2^\intercal + \dots + \vb{u}_n\vb{u}_n^\intercal
 \end{equation}
 Recalling that $\vb{x}$ can be expanded in terms of the columns of $\vb{U}$, we have
 \begin{equation}
     \begin{aligned}
-    \vb{U}\vb{U}^\intercal \vb{x} &= \vb{u}_1\vb{u}_1^\intercal\vb{x} + \vb{u}_2\vb{u}_2^\intercal\vb{x} + \dots + \vb{u}_m\vb{u}_m^\intercal\vb{x}\\
-       & = \vb{u}_1\vb{x}^1 + \vb{u}_2\vb{x}^2 + \dots + \vb{u}_m\vb{x}^m\\
+    \vb{U}\vb{U}^\intercal \vb{x} &= \vb{u}_1\vb{u}_1^\intercal\vb{x} + \vb{u}_2\vb{u}_2^\intercal\vb{x} + \dots + \vb{u}_n\vb{u}_n^\intercal\vb{x}\\
+       & = \vb{u}_1 x^1 + \vb{u}_2 x^2 + \dots + \vb{u}_n x^n\\
        & = \vb{x}
     \end{aligned}
  \end{equation}
- since $\vb{x}$ is arbitrary, we conclude $\vb{U}\vb{U}^\intercal=1$. 
+ since $\vb{x}$ is arbitrary, we conclude $\vb{U}\vb{U}^\intercal=1$.
 
  Unitary matrices have this name because they are analogous to unitary complex numbers in some sense. Unitary complex numbers have modulus $1$ and thus preserve the modulus of any complex number upon multiplication. Similarly, unitary matrices preserve the norm, or more generally, the inner product, of any vector. To see this, let $\vb{y}_1 = \vb{U}^\intercal \vb{x}_1$ and $\vb{y}_2 = \vb{U}^\intercal \vb{x}_1$. It's easy to see that $\vb{y}_2^\intercal \vb{y}_1 = \vb{x}_2^\intercal \vb{U} \vb{U}^\intercal \vb{x}_1 = \vb{x}_2^\intercal\vb{x}_1$.
 
 \section{Singular Value Decomposition}
+
 Now we turn to our main goal: to make sens of the Singular Values Decomposition. Simply stated, the decomposition consists of expressing \textbf{any} matrix as the product of insightful matrices
 \begin{equation}
     \vb{A}=\vb{U}\boldsymbol{\Sigma}\vb{V}^\intercal
@@ -110,4 +111,3 @@ Now we turn to our main goal: to make sens of the Singular Values Decomposition.
 \section{Applications}
 \subsection{Solving linear systems}
 \end{document}
-
